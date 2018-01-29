@@ -1,0 +1,67 @@
+body {
+    background-color: #eaeaea;
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 60px;
+}
+
+ul {
+    list-style: none;
+    font-size: 1.5em;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+input[type=checkbox] {
+    font-size: 1em;
+    margin: 13px 0;
+}
+
+label {
+    width: 100%;
+    text-align: left;
+    padding: 0 0 0 15px;
+}
+
+.todo-list {
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 15px;
+    box-shadow: 2px 2px 2px #888;
+    border-radius: 3px;
+}
+input[type=text] {
+    font-size: 1.4em;
+    padding: 3px 6px;
+}
+.filters .active {
+    background-color: #0074D9;
+    border: none;
+    outline: none;
+    color: #ffffff;
+}
+
+.filters button {
+    border: none;
+    outline: none;
+    font-size: 1em;
+    padding: 5px;
+}
+
+.remove {
+    background-color: transparent;
+    border: none;
+    font-size: 1em;
+}
+
+.remove:hover {
+    cursor: pointer;
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Hello World</title>
+  <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  <link rel="stylesheet" href="./main.css">
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+  class Button extends React.Component {
+    updateCount = () => {
+      this.props.onClickFunction(this.props.incrementValue)
+    }
+
+    render() {
+      return (
+        <button onClick={this.updateCount}>
+          +{this.props.incrementValue}
+        </button>
+      )
+    }
+  }
+
+  const Result = (props) => {
+    return (
+      <div>{ props.counter }</div>
+    )
+  }
+
+  class App extends React.Component {
+    state = { counter: 1 }
+
+    incrementCounter = (incrementValue) => {
+      this.setState((prevState) => ({
+        counter: prevState.counter + incrementValue
+      }))
+    }
+
+    render() {
+      return (
+        <div>
+          <Button incrementValue={1} onClickFunction={this.incrementCounter} />
+          <Button incrementValue={5} onClickFunction={this.incrementCounter} />
+          <Button incrementValue={10} onClickFunction={this.incrementCounter} />
+          <Button incrementValue={100} onClickFunction={this.incrementCounter} />
+          <Result counter={this.state.counter} />
+        </div>
+      );
+    }
+  }
+
+  ReactDOM.render(<App/>, document.getElementById('root'));
+</script>
+</body>
+</html>

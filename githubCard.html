@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Hello World</title>
+  <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.17.1/axios.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  <link rel="stylesheet" href="./base.css">
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+  const Card = (props) => {
+    return (
+      <div>
+        <img width="75" src={props.avatar_url} />
+        <div style={{display: 'inline-block', marginLeft: '10px', verticalAlign: 'top'}}>
+          <div style={{fontSize: '1.25em', fontWeight: 'bold'}}>
+            { props.name }
+          </div>
+          <div>{ props.company }</div>
+        </div>
+      </div>
+    );
+  }
+
+  const CardList = (props) => {
+    return (
+      <div>
+        { props.cards.map(card => <Card key={card.id} {...card} />)}
+      </div>
+    );
+  }
+
+  class Form extends React.Component {
+    state = { userName: '' };
+
+    handleSubmit = (event) => {
+      event.preventDefault();
+      axios.get(`https://api.github.com/users/${this.state.userName}`)
+        .then(response => {
+          this.props.onSubmit(response.data)
+          this.setState({userName: ''})
+        })
+    }
+
+    render() {
+      return (
+          <form onSubmit={this.handleSubmit}>
+            <input
+                type="text"
+                placeholder="Github Username"
+                value={this.state.userName}
+                onChange={(event) => this.setState({ userName: event.target.value })}
+            />
+            <button type="submit">Add Card</button>
+          </form>
+      );
+    }
+  }
+
+  class App extends React.Component {
+    state = {
+      cards: []
+    }
+
+    addNewCard = (cardInfo) => {
+      this.setState(prevState => ({
+        cards: prevState.cards.concat(cardInfo)
+      }))
+    }
+
+    render() {
+      return (
+        <div>
+          <Form onSubmit={this.addNewCard}/>
+          <CardList cards={this.state.cards} />
+        </div>
+      );
+    }
+  }
+
+  ReactDOM.render(<App/>, document.getElementById('root'));
+</script>
+</body>
+</html>

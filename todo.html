@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Hello World</title>
+  <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  <link rel="stylesheet" href="./main.css">
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+  const todoApp = (<div className={'todo-list'}>
+      <h1 className={'title'}>Todo List</h1>
+      <input type="text" name="new-todo" placeholder="add your todo..."/>
+      <ul>
+        <li>
+          <input type="checkbox" />
+          <label> todo </label>
+          <button className={'remove'}>x</button>
+        </li>
+      </ul>
+      <div className={'filters'}>
+        <span className={'todos-left'}>3 Todos left - </span>
+        <button>All</button> -
+        <button>Active</button> -
+        <button>Completed</button>
+      </div>
+    </div>);
+
+  ReactDOM.render(
+    todoApp,
+    document.getElementById('root')
+  );
+
+</script>
+</body>
+</html>
